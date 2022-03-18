@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Jade Delight</title>
+</head>
+
+<style type = "text/css">
+
+	body{
+
+		background-color: #87CEEB; 
+		font-family: Georgia; 
+	}
+
+	form, h1, table{
+		text-align: center; 
+	}
+	
+div{
+
+	text-align: center; 
+	display: flex; 
+}
+</style>
+
+<body>
+<script>
+
+function MenuItem(name, cost)
+{
+	this.name = name;
+	this.cost=cost;
+}
+
+menuItems = new Array(
+	new MenuItem("Chicken Chop Suey", 4.5),
+	new MenuItem("Sweet and Sour Pork", 6.25),
+	new MenuItem("Shrimp Lo Mein", 6.25),
+	new MenuItem("Moo Shi Chicken", 7.5),
+	new MenuItem("Fried Rice", 2.85)
+);
+
+function makeSelect(name, minRange, maxRange)
+{
+	var t= "";
+	t = "<select name='" + name + "' size='1'>";
+	for (j=minRange; j<=maxRange; j++)
+	   t += "<option>" + j + "</option>";
+	t+= "</select>"; 
+	return t;
+}
+
+function td(content, className="")
+{
+	return "<td class = '" + className + "'>" + content + "</td>";
+}
+	
+</script>
+
+<script>
+	//Newly written code begins here and is responsible for all other functionality needed
+	//within the assignment. 
+	function check_name_exists(person_name){
+	
+		 //Must check letters from A-Z in capital letters and lowercase. 
+		expression = [a-zA-Z];
+	
+		//If true, then .test method tests to match a string that has a name entered. 
+	
+		if (true){
+	
+			return expression.test(person_name); 
+	
+		}
+		
+	
+	}
+	
+	function check_last_name(){
+		
+		var last = document.getElementsByName("last_name");
+		
+		var check = document.getElementById("error"); 
+	
+	
+		//check if last name is empty 
+		if (last.value[0] == ""){
+	
+			check.innerHTML = "Enter last name"; 
+			return false; 
+		
+		}
+
+		name = check_name_exists(last); 
+
+		if (name != true){
+
+			check.innerHTML = "Enter letters only."
+		}
+	}
+	
+	function check_address(){
+	
+		var address; 
+		var error; 
+	
+		var check = document.getElementsByName(address); 
+	
+		var error_check = document.getElementById(error); 
+	
+		//check if something was submitted 
+		if (check.value[0] == ""){
+	
+			error_check.innerHTML = "Enter an " + address; 
+		}
+	
+		
+	}
+	
+	function check_phone(){
+	
+		var number = document.getElementsByName("phone_number");
+	
+		var check_error = document.getElementById("error"); 
+	
+		//check if phone number is not submitted 
+		if (number.value[0] == ""){
+	
+			check_error.innerHTML = "Enter a valid phone number."; 
+		
+		}
+	
+	}
+
+	function check_delivery(){
+
+		//This will add a star for elements that are required for delivery.
+
+		if (true){
+
+		document.getElementById("first").innerHTML = "*"; 
+		
+		document.getElementById("second").innerHTML = "*"; 
+
+		}
+
+	
+	}
+
+	function checkTime(){
+
+		var minutes; 
+
+		date = new Date();
+
+		//counting by seconds conversion of minutes for delivery or pick up. 
+
+		return new Date(date.getTime() + minutes*60000); 
+
+
+	}
+
+	function showTotal(){
+
+
+		var items; 
+		var subtotal = 0; 
+
+		//calculate all subtotals based on the information provided 
+		// in the makeSelect function. 
+
+
+		for (i = 0; i < menuItems.length; i++){
+
+			items = document.getElementsByName("quan" + i)[0].value;
+
+			if (parseInt(items) != 0){
+
+				new_cost = (parseInt(items)*menuItems[i].cost).toFixed(2); 
+
+				document.getElementsByName("cost")[i].value = new_cost; 
+
+				subtotal = subtotal + parseInt(new_cost); 
+			}
+		}
+
+
+		  tax = (subtotal * 0.0625);
+
+          total = subtotal + tax;
+
+        document.getElementById("subtotal").value = subtotal.toFixed(2);
+
+        document.getElementById("tax").value = tax.toFixed(2);
+
+       document.getElementById("total").value = total.toFixed(2);
+
+	
+	   //Testing purposes: t = "<select name='" + name + "' size='1' onchange = 'showTotal'>";
+
+	}
+
+	function validate_values(){
+	
+	var valid_quantity = true; 
+
+	if ((check_last_name() != validate_quantity) && (check_phone() != valid_quantity)){
+
+		validate_values = false; 
+}
+
+
+	var time;
+
+	var order; 
+
+	var type = document.getElementsByName("p_or_d")[0].value; 
+
+	if (type){
+
+		time = 30; 
+
+		order = "delivery"; 
+
+	}else{
+
+		time = 15; 
+		order = "pickup"; 
+	}
+
+}
+
+	function window_message(){
+
+		var time;
+		var price; 
+		var order; 
+
+
+		var minutes = time.getMinutes();
+
+		var hours = time.getHours(); 
+
+		alert("Thank you for your order. It will take " + hours + minutes + ". Amount to pay: " + price); 
+
+		if (items == 0){
+
+   alert("Must purchase at least one item.");
+
+    return false; 
+}
+
+		
+	<form action='#' method="post" target="_blank" onsubmit="window.open('','_blank')">
+    <input name="value"></input>
+
+	  validate_values(); 
+
+	    window.open();
+
+   </form>
+
+
+	}
+
+	</script>
+	
+
+<h1>Jade Delight</h1>
+
+<form> 
+<p class="userInfo"><label>First Name:</label> <input type="text"  name='fname' /></p>
+<p class="userInfo"><label>Last Name*</label>:  <input type="text"  name='lname' /></p>
+<p class="userInfo address"><label>Street*</label>: <input type="text" name='street' /></p>
+<p class="userInfo address"><label>City*</label>: <input type="text" name='city' /></p>
+<p class="userInfo"><label>Phone*</label>: <input type="text"  name='phone' /></p>
+<p> 
+	<input type="radio"  name="p_or_d" value = "pickup" checked="checked"/>Pickup  
+	<input type="radio"  name='p_or_d' value = 'delivery'/>
+	Delivery
+</p>
+<table border="0" cellpadding="3">
+  <tr>
+    <th>Select Item</th>
+    <th>Item Name</th>
+    <th>Cost Each</th>
+    <th>Total Cost</th>
+  </tr>
+<script>
+
+  var s = "";
+  for (i=0; i< menuItems.length; i++)
+  {
+	  s += "<tr>";
+	  s += td(makeSelect("quan" + i, 0, 10),"selectQuantity");
+	  s += td(menuItems[i].name, "itemName");
+	  s += td("$" +menuItems[i].cost.toFixed(2), "cost");
+	  s += td("$<input type='text' name='cost'/>", "totalCost");
+	  s+= "</tr>";
+  }
+  document.writeln(s);
+
+</script>
+</table>
+<p class="subtotal totalSection"><label>Subtotal</label>: 
+   $ <input type="text"  name='subtotal' id="subtotal" />
+</p>
+<p class="tax totalSection"><label>Mass tax 6.25%:</label>
+  $ <input type="text"  name='tax' id="tax" />
+</p>
+<p clas="total totalSection"><label>Total:</label> $ <input type="text"  name='total' id="total" />
+</p>
+
+<input type = "button" value = "Submit Order" />
+
+    
+
+</form>
+
+
+</body>
+</html>
